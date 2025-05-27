@@ -1,4 +1,4 @@
-package com.t1.project.model.enums;
+package com.t1.project.core.model.enums;
 
 public enum AccountType {
     DEBIT,

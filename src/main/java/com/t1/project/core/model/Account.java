@@ -1,13 +1,18 @@
-package com.t1.project.model;
+package com.t1.project.core.model;
 
+import com.t1.project.core.model.enums.AccountType;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,28 +21,33 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "transaction")
+@Table(name = "account")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Transaction {
+public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "account_id", nullable = false)
-    private Account account;
+    @JoinColumn(name = "client_id", nullable = false)
+    private Client client;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, columnDefinition = "account_type")
+    private AccountType accountType;
 
     @Column(nullable = false, precision = 19, scale = 2)
-    private BigDecimal amount;
+    private BigDecimal balance = BigDecimal.ZERO;
 
-    @Column(name = "transaction_time",nullable = false)
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private LocalDateTime transactionTime = LocalDateTime.now();
+    private List<Transaction> transactions = new ArrayList<>();
 }

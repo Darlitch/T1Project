@@ -1,4 +1,4 @@
-package com.t1.project.model;
+package com.t1.project.core.model;
 
 
 import jakarta.persistence.Column;
