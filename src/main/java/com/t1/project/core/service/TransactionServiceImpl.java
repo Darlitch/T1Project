@@ -1,4 +1,11 @@
 package com.t1.project.core.service;
 
-public class TransactionServiceImpl {
+import com.t1.project.core.repository.TransactionRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class TransactionServiceImpl implements TransactionService {
+    private final TransactionRepository transactionRepository;
 }

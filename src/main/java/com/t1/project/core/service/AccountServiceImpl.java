@@ -1,4 +1,9 @@
 package com.t1.project.core.service;
 
-public class AccountServiceImpl {
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class AccountServiceImpl implements AccountService {
 }
