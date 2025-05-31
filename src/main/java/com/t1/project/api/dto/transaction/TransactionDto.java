@@ -22,5 +22,5 @@ public class TransactionDto {
     Long id;
     AccountDto account;
     BigDecimal amount;
-    LocalDateTime transactionDate;
+    LocalDateTime transactionTime;
 }

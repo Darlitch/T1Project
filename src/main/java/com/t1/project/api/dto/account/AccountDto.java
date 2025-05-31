@@ -1,10 +1,8 @@
 package com.t1.project.api.dto.account;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.t1.project.api.dto.client.ClientDto;
-import com.t1.project.api.dto.transaction.TransactionDto;
+import com.t1.project.api.dto.client.ClientShortDto;
 import com.t1.project.core.model.enums.AccountType;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +11,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -23,7 +20,7 @@ import java.util.List;
 @Builder
 public class AccountDto {
     Long id;
-    ClientDto client;
+    ClientShortDto client;
     AccountType accountType;
     BigDecimal balance;
 }

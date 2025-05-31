@@ -1,5 +1,6 @@
 package com.t1.project.core.service;
 
+import com.t1.project.core.model.Transaction;
 import com.t1.project.core.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -8,4 +9,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class TransactionServiceImpl implements TransactionService {
     private final TransactionRepository transactionRepository;
+
+
+    private Transaction getEntityById(long id) {
+        return transactionRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
 }
