@@ -1,4 +1,4 @@
-package com.t1.project.api.mapper;
+package com.t1.project.api.mapper.account;
 
 import com.t1.project.api.dto.account.AccountDto;
 import com.t1.project.core.model.Account;

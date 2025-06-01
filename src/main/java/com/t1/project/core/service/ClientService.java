@@ -8,17 +8,20 @@ import com.t1.project.core.model.Client;
 import java.util.List;
 
 public interface ClientService {
+
     ClientDto create(ClientCreateDto client);
 
     List<ClientDto> getAll();
 
     ClientDto getById(long id);
 
-    ClientDto getByFullName(String name);
+    Client getEntityById(long id);
 
-    ClientDto getByLastName(String lastName);
+    List<ClientDto> getByLastName(String lastName);
 
-    ClientDto update(ClientUpdateDto clent);
+    List<Client> getEntityByLastName(String lastName);
+
+    ClientDto update(long id, ClientUpdateDto clent);
 
     void delete(long id);
 }

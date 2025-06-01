@@ -8,7 +8,7 @@ import com.t1.project.core.model.Transaction;
 import java.util.List;
 
 public interface TransactionService {
-    TransactionDto create(TransactionCreateDto transaction);
+    TransactionDto create(long accountId, TransactionCreateDto transactionDto);
 
     List<TransactionDto> getAll();
 
@@ -16,7 +16,7 @@ public interface TransactionService {
 
     List<TransactionDto> getAllByAccountId(long AccountId);
 
-    TransactionDto update(TransactionUpdateDto transaction);
+    TransactionDto update(long id, TransactionUpdateDto transactionDto);
 
     void delete(long id);
 }

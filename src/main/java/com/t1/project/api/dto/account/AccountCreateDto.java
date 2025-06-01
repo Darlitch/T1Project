@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.math.BigDecimal;
 
 
 @Data
@@ -20,7 +21,6 @@ import lombok.experimental.FieldDefaults;
 @Builder
 public class AccountCreateDto {
     @NotNull
-    Long clientId;
-    @NotNull
     AccountType accountType;
+    BigDecimal balance;
 }

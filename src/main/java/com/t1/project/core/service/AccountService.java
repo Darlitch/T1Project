@@ -8,15 +8,17 @@ import com.t1.project.core.model.Account;
 import java.util.List;
 
 public interface AccountService {
-    AccountDto create(AccountCreateDto account);
+    AccountDto create(Long clientId, AccountCreateDto account);
 
     List<AccountDto> getAll();
 
     AccountDto getById(long id);
 
-    List<Account> getAllByClientId(long clientId);
+    Account getEntityById(long id);
 
-    AccountDto update(AccountUpdateDto account);
+    List<AccountDto> getAllByClientId(long clientId);
+
+    AccountDto update(long id, AccountUpdateDto account);
 
     void delete(long id);
 }

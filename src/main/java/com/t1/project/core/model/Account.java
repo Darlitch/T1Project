@@ -45,6 +45,7 @@ public class Account {
     private AccountType accountType;
 
     @Column(precision = 19, scale = 2)
+    @Builder.Default
     private BigDecimal balance = BigDecimal.ZERO;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)

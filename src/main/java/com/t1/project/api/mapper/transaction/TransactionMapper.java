@@ -1,4 +1,4 @@
-package com.t1.project.api.mapper;
+package com.t1.project.api.mapper.transaction;
 
 import com.t1.project.api.dto.transaction.TransactionDto;
 import com.t1.project.core.model.Transaction;

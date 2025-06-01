@@ -1,4 +1,4 @@
-package com.t1.project.api.mapper;
+package com.t1.project.api.mapper.client;
 
 import com.t1.project.api.dto.client.ClientDto;
 import com.t1.project.core.model.Client;
