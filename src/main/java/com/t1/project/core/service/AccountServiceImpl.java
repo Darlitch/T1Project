@@ -5,6 +5,8 @@ import com.t1.project.api.dto.account.AccountDto;
 import com.t1.project.api.dto.account.AccountUpdateDto;
 import com.t1.project.api.mapper.account.AccountMapper;
 import com.t1.project.api.mapper.account.AccountUpdateMapper;
+import com.t1.project.core.exception.ErrorCode;
+import com.t1.project.core.exception.ServiceException;
 import com.t1.project.core.model.Account;
 import com.t1.project.core.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +44,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account getEntityById(long id) {
-        return accountRepository.findById(id).orElseThrow(RuntimeException::new);
+        return accountRepository.findById(id).orElseThrow(() -> new ServiceException("There is no account with ID: " + id, ErrorCode.NOT_FOUND));
     }
 
     @Override

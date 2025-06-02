@@ -5,6 +5,8 @@ import com.t1.project.api.dto.client.ClientDto;
 import com.t1.project.api.dto.client.ClientUpdateDto;
 import com.t1.project.api.mapper.client.ClientMapper;
 import com.t1.project.api.mapper.client.ClientUpdateMapper;
+import com.t1.project.core.exception.ErrorCode;
+import com.t1.project.core.exception.ServiceException;
 import com.t1.project.core.model.Client;
 import com.t1.project.core.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +44,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client getEntityById(long id) {
-        return clientRepository.findById(id).orElseThrow(RuntimeException::new);
+        return clientRepository.findById(id).orElseThrow(() -> new ServiceException("There is no client with ID: " + id, ErrorCode.NOT_FOUND));
     }
 
     @Override

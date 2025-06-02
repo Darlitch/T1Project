@@ -5,6 +5,8 @@ import com.t1.project.api.dto.transaction.TransactionDto;
 import com.t1.project.api.dto.transaction.TransactionUpdateDto;
 import com.t1.project.api.mapper.transaction.TransactionMapper;
 import com.t1.project.api.mapper.transaction.TransactionUpdateMapper;
+import com.t1.project.core.exception.ErrorCode;
+import com.t1.project.core.exception.ServiceException;
 import com.t1.project.core.model.Transaction;
 import com.t1.project.core.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +40,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     private Transaction getEntityById(long id) {
-        return transactionRepository.findById(id).orElseThrow(RuntimeException::new);
+        return transactionRepository.findById(id).orElseThrow(() -> new ServiceException("There is no transaction with ID: " + id, ErrorCode.NOT_FOUND));
     }
 
     public List<TransactionDto> getAllByAccountId(long accountId) {

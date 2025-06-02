@@ -1,19 +1,20 @@
-package com.t1.project.api.dto;
+package com.t1.project.api.dto.exception;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
+
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
-public class ExceptionDto {
-    String message;
+public class ErrorResponse {
+    final String message;
+    final LocalDateTime timestamp = LocalDateTime.now();
 }
