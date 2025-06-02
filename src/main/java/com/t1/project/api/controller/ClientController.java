@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/clients")
+@RequestMapping("/api/v1/clients")
 @RequiredArgsConstructor
 public class ClientController {
 
