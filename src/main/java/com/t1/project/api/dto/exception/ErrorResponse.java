@@ -16,5 +16,4 @@ import java.time.LocalDateTime;
 @Builder
 public class ErrorResponse {
     final String message;
-    final LocalDateTime timestamp = LocalDateTime.now();
 }
