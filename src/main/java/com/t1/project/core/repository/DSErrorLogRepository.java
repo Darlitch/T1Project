@@ -1,0 +1,9 @@
+package com.t1.project.core.repository;
+
+import com.t1.project.core.model.DataSourceErrorLog;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface DSErrorLogRepository extends JpaRepository<DataSourceErrorLog, Long> {
+}
