@@ -26,11 +26,9 @@ public class DataSourceErrorLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob
     @Column(name = "stack_trace", nullable = false)
     private String stackTrace;
 
-    @Lob
     @Column(name = "error_message", nullable = false)
     private String errorMessage;
 

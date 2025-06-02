@@ -2,7 +2,6 @@ package com.t1.project.api.dto.account;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.t1.project.core.model.enums.AccountType;
-import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

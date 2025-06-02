@@ -5,12 +5,14 @@ import com.t1.project.api.dto.account.AccountDto;
 import com.t1.project.api.dto.account.AccountUpdateDto;
 import com.t1.project.api.mapper.account.AccountMapper;
 import com.t1.project.api.mapper.account.AccountUpdateMapper;
+import com.t1.project.core.aspect.annotation.LogDataSourceError;
 import com.t1.project.core.exception.ErrorCode;
 import com.t1.project.core.exception.ServiceException;
 import com.t1.project.core.model.Account;
 import com.t1.project.core.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 
 import java.util.List;
 
@@ -23,7 +25,9 @@ public class AccountServiceImpl implements AccountService {
     private final AccountUpdateMapper accountUpdateMapper;
     private final ClientService clientService;
 
+
     @Override
+    @LogDataSourceError
     public AccountDto create(Long clientId, AccountCreateDto accountDto) {
         Account account = Account.builder()
                 .client(clientService.getEntityById(clientId))
@@ -33,26 +37,31 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @LogDataSourceError
     public List<AccountDto> getAll() {
         return accountMapper.toDto(accountRepository.findAll());
     }
 
     @Override
+    @LogDataSourceError
     public AccountDto getById(long id) {
         return accountMapper.toDto(getEntityById(id));
     }
 
     @Override
+    @LogDataSourceError
     public Account getEntityById(long id) {
         return accountRepository.findById(id).orElseThrow(() -> new ServiceException("There is no account with ID: " + id, ErrorCode.NOT_FOUND));
     }
 
     @Override
+    @LogDataSourceError
     public List<AccountDto> getAllByClientId(long clientId) {
         return accountMapper.toDto(accountRepository.findAllByClientId(clientId));
     }
 
     @Override
+    @LogDataSourceError
     public AccountDto update(long id, AccountUpdateDto accountDto) {
         Account account = getEntityById(id);
         accountUpdateMapper.updateFromDto(accountDto, account);
@@ -60,6 +69,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @LogDataSourceError
     public void delete(long id) {
         accountRepository.delete(getEntityById(id));
     }
