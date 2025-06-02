@@ -40,8 +40,7 @@ public class Account {
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, columnDefinition = "account_type")
+    @Column(name = "type", nullable = false)
     private AccountType accountType;
 
     @Column(precision = 19, scale = 2)

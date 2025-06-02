@@ -5,13 +5,14 @@ import com.t1.project.api.dto.account.AccountCreateDto;
 import com.t1.project.api.dto.account.AccountDto;
 import com.t1.project.api.dto.account.AccountUpdateDto;
 import com.t1.project.core.service.AccountService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -28,7 +29,7 @@ public class AccountController {
 
     @PostMapping("/{clientId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public AccountDto create(@PathVariable Long clientId, @RequestBody AccountCreateDto accountDto) {
+    public AccountDto create(@PathVariable Long clientId,@Valid @RequestBody AccountCreateDto accountDto) {
         return accountService.create(clientId, accountDto);
     }
 
@@ -47,8 +48,8 @@ public class AccountController {
         return accountService.getById(id);
     }
 
-    @PutMapping("/{id}")
-    public AccountDto update(@PathVariable Long id, @RequestBody AccountUpdateDto accountDto) {
+    @PatchMapping("/{id}")
+    public AccountDto update(@PathVariable Long id,@Valid @RequestBody AccountUpdateDto accountDto) {
         return accountService.update(id, accountDto);
     }
 

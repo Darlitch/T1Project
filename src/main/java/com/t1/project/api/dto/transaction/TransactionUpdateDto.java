@@ -19,7 +19,6 @@ import java.math.BigDecimal;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 public class TransactionUpdateDto {
-    Long accountId;
     @Positive
     BigDecimal amount;
 }

@@ -2,6 +2,7 @@ package com.t1.project.api.dto.client;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.t1.project.api.dto.account.AccountDto;
+import com.t1.project.api.dto.account.AccountShortDto;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,5 +23,5 @@ public class ClientDto {
     String firstName;
     String middleName;
     String lastName;
-    List<AccountDto> accounts;
+    List<AccountShortDto> accounts;
 }

@@ -26,7 +26,7 @@ public class TransactionServiceImpl implements TransactionService {
                 .account(accountService.getEntityById(accountId))
                 .amount(transactionDto.getAmount())
                 .build();
-        return transactionMapper.toDto(transaction);
+        return transactionMapper.toDto(transactionRepository.save(transaction));
     }
 
     public List<TransactionDto> getAll() {
@@ -48,7 +48,7 @@ public class TransactionServiceImpl implements TransactionService {
     public TransactionDto update(long id, TransactionUpdateDto transactionDto) {
         Transaction transaction = getEntityById(id);
         transactionUpdateMapper.updateFromDto(transactionDto, transaction);
-        return transactionMapper.toDto(transaction);
+        return transactionMapper.toDto(transactionRepository.save(transaction));
     }
 
     public void delete(long id) {

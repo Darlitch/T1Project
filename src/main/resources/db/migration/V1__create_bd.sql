@@ -5,12 +5,12 @@ CREATE TABLE IF NOT EXISTS client (
     last_name VARCHAR(255) NOT NULL
 );
 
-CREATE TYPE account_type AS ENUM ('DEBIT', 'CREDIT');
+-- CREATE TYPE account_type AS ENUM ('DEBIT', 'CREDIT');
 
 CREATE TABLE IF NOT EXISTS account (
     id BIGSERIAL PRIMARY KEY,
     client_id BIGINT NOT NULL,
-    type account_type NOT NULL,
+    type INT NOT NULL,
     balance DECIMAL(19, 2) NOT NULL DEFAULT 0.00
         CHECK (balance >= 0),
     CONSTRAINT fk_account_client

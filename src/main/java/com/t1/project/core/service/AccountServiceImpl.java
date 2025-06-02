@@ -27,7 +27,7 @@ public class AccountServiceImpl implements AccountService {
                 .client(clientService.getEntityById(clientId))
                 .accountType(accountDto.getAccountType())
                 .build();
-        return accountMapper.toDto(account);
+        return accountMapper.toDto(accountRepository.save(account));
     }
 
     @Override
@@ -54,7 +54,7 @@ public class AccountServiceImpl implements AccountService {
     public AccountDto update(long id, AccountUpdateDto accountDto) {
         Account account = getEntityById(id);
         accountUpdateMapper.updateFromDto(accountDto, account);
-        return accountMapper.toDto(account);
+        return accountMapper.toDto(accountRepository.save(account));
     }
 
     @Override
