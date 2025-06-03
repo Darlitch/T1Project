@@ -6,6 +6,7 @@ import com.t1.project.api.dto.client.ClientUpdateDto;
 import com.t1.project.api.mapper.client.ClientMapper;
 import com.t1.project.api.mapper.client.ClientUpdateMapper;
 import com.t1.project.core.aspect.annotation.LogDataSourceError;
+import com.t1.project.core.aspect.annotation.Metric;
 import com.t1.project.core.exception.ErrorCode;
 import com.t1.project.core.exception.ServiceException;
 import com.t1.project.core.model.Client;
@@ -35,36 +36,42 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
+    @Metric
     @LogDataSourceError
     public List<ClientDto> getAll() {
         return clientMapper.toDto(clientRepository.findAll());
     }
 
     @Override
+    @Metric
     @LogDataSourceError
     public ClientDto getById(long id) {
         return clientMapper.toDto(getEntityById(id));
     }
 
     @Override
+    @Metric
     @LogDataSourceError
     public Client getEntityById(long id) {
         return clientRepository.findById(id).orElseThrow(() -> new ServiceException("There is no client with ID: " + id, ErrorCode.NOT_FOUND));
     }
 
     @Override
+    @Metric
     @LogDataSourceError
     public List<ClientDto> getByLastName(String lastName) {
         return clientMapper.toDto(getEntityByLastName(lastName));
     }
 
     @Override
+    @Metric
     @LogDataSourceError
     public List<Client> getEntityByLastName(String lastName) {
         return clientRepository.findByLastName(lastName);
     }
 
     @Override
+    @Metric
     @LogDataSourceError
     public ClientDto update(long id, ClientUpdateDto clientDto) {
         Client client = getEntityById(id);
@@ -74,6 +81,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
+    @Metric
     @LogDataSourceError
     public void delete(long id) {
         clientRepository.delete(getEntityById(id));

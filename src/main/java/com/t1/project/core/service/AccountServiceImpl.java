@@ -6,6 +6,7 @@ import com.t1.project.api.dto.account.AccountUpdateDto;
 import com.t1.project.api.mapper.account.AccountMapper;
 import com.t1.project.api.mapper.account.AccountUpdateMapper;
 import com.t1.project.core.aspect.annotation.LogDataSourceError;
+import com.t1.project.core.aspect.annotation.Metric;
 import com.t1.project.core.exception.ErrorCode;
 import com.t1.project.core.exception.ServiceException;
 import com.t1.project.core.model.Account;
@@ -25,7 +26,6 @@ public class AccountServiceImpl implements AccountService {
     private final AccountUpdateMapper accountUpdateMapper;
     private final ClientService clientService;
 
-
     @Override
     @LogDataSourceError
     public AccountDto create(Long clientId, AccountCreateDto accountDto) {
@@ -36,31 +36,37 @@ public class AccountServiceImpl implements AccountService {
         return accountMapper.toDto(accountRepository.save(account));
     }
 
+
     @Override
+    @Metric
     @LogDataSourceError
     public List<AccountDto> getAll() {
         return accountMapper.toDto(accountRepository.findAll());
     }
 
     @Override
+    @Metric
     @LogDataSourceError
     public AccountDto getById(long id) {
         return accountMapper.toDto(getEntityById(id));
     }
 
     @Override
+    @Metric
     @LogDataSourceError
     public Account getEntityById(long id) {
         return accountRepository.findById(id).orElseThrow(() -> new ServiceException("There is no account with ID: " + id, ErrorCode.NOT_FOUND));
     }
 
     @Override
+    @Metric
     @LogDataSourceError
     public List<AccountDto> getAllByClientId(long clientId) {
         return accountMapper.toDto(accountRepository.findAllByClientId(clientId));
     }
 
     @Override
+    @Metric
     @LogDataSourceError
     public AccountDto update(long id, AccountUpdateDto accountDto) {
         Account account = getEntityById(id);
@@ -69,6 +75,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Metric
     @LogDataSourceError
     public void delete(long id) {
         accountRepository.delete(getEntityById(id));
