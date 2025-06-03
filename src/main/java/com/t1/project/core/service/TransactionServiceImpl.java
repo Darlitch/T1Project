@@ -5,6 +5,7 @@ import com.t1.project.api.dto.transaction.TransactionDto;
 import com.t1.project.api.dto.transaction.TransactionUpdateDto;
 import com.t1.project.api.mapper.transaction.TransactionMapper;
 import com.t1.project.api.mapper.transaction.TransactionUpdateMapper;
+import com.t1.project.core.aspect.annotation.Cached;
 import com.t1.project.core.aspect.annotation.LogDataSourceError;
 import com.t1.project.core.aspect.annotation.Metric;
 import com.t1.project.core.exception.ErrorCode;
@@ -26,6 +27,7 @@ public class TransactionServiceImpl implements TransactionService {
     private final AccountService accountService;
 
     @Override
+    @Cached
     @LogDataSourceError
     public TransactionDto create(long accountId, TransactionCreateDto transactionDto) {
         Transaction transaction = Transaction.builder()
@@ -37,6 +39,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     @Metric
+    @Cached
     @LogDataSourceError
     public List<TransactionDto> getAll() {
         return transactionMapper.toDto(transactionRepository.findAll());
@@ -44,12 +47,14 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     @Metric
+    @Cached
     @LogDataSourceError
     public TransactionDto getById(long id) {
         return transactionMapper.toDto(getEntityById(id));
     }
 
     @Metric
+    @Cached
     @LogDataSourceError
     private Transaction getEntityById(long id) {
         return transactionRepository.findById(id).orElseThrow(() -> new ServiceException("There is no transaction with ID: " + id, ErrorCode.NOT_FOUND));
@@ -57,6 +62,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     @Metric
+    @Cached
     @LogDataSourceError
     public List<TransactionDto> getAllByAccountId(long accountId) {
         return transactionMapper.toDto(transactionRepository.findAllByAccountId(accountId));

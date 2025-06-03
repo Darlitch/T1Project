@@ -5,6 +5,7 @@ import com.t1.project.api.dto.account.AccountDto;
 import com.t1.project.api.dto.account.AccountUpdateDto;
 import com.t1.project.api.mapper.account.AccountMapper;
 import com.t1.project.api.mapper.account.AccountUpdateMapper;
+import com.t1.project.core.aspect.annotation.Cached;
 import com.t1.project.core.aspect.annotation.LogDataSourceError;
 import com.t1.project.core.aspect.annotation.Metric;
 import com.t1.project.core.exception.ErrorCode;
@@ -27,6 +28,7 @@ public class AccountServiceImpl implements AccountService {
     private final ClientService clientService;
 
     @Override
+    @Cached
     @LogDataSourceError
     public AccountDto create(Long clientId, AccountCreateDto accountDto) {
         Account account = Account.builder()
@@ -39,6 +41,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Metric
+    @Cached
     @LogDataSourceError
     public List<AccountDto> getAll() {
         return accountMapper.toDto(accountRepository.findAll());
@@ -46,6 +49,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Metric
+    @Cached
     @LogDataSourceError
     public AccountDto getById(long id) {
         return accountMapper.toDto(getEntityById(id));
@@ -53,6 +57,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Metric
+    @Cached
     @LogDataSourceError
     public Account getEntityById(long id) {
         return accountRepository.findById(id).orElseThrow(() -> new ServiceException("There is no account with ID: " + id, ErrorCode.NOT_FOUND));
@@ -60,6 +65,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Metric
+    @Cached
     @LogDataSourceError
     public List<AccountDto> getAllByClientId(long clientId) {
         return accountMapper.toDto(accountRepository.findAllByClientId(clientId));

@@ -5,6 +5,7 @@ import com.t1.project.api.dto.client.ClientDto;
 import com.t1.project.api.dto.client.ClientUpdateDto;
 import com.t1.project.api.mapper.client.ClientMapper;
 import com.t1.project.api.mapper.client.ClientUpdateMapper;
+import com.t1.project.core.aspect.annotation.Cached;
 import com.t1.project.core.aspect.annotation.LogDataSourceError;
 import com.t1.project.core.aspect.annotation.Metric;
 import com.t1.project.core.exception.ErrorCode;
@@ -25,6 +26,7 @@ public class ClientServiceImpl implements ClientService {
     private final ClientUpdateMapper clientUpdateMapper;
 
     @Override
+    @Cached
     @LogDataSourceError
     public ClientDto create(ClientCreateDto clientDto) {
         Client client = Client.builder()
@@ -37,6 +39,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     @Metric
+    @Cached
     @LogDataSourceError
     public List<ClientDto> getAll() {
         return clientMapper.toDto(clientRepository.findAll());
@@ -44,6 +47,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     @Metric
+    @Cached
     @LogDataSourceError
     public ClientDto getById(long id) {
         return clientMapper.toDto(getEntityById(id));
@@ -51,6 +55,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     @Metric
+    @Cached
     @LogDataSourceError
     public Client getEntityById(long id) {
         return clientRepository.findById(id).orElseThrow(() -> new ServiceException("There is no client with ID: " + id, ErrorCode.NOT_FOUND));
@@ -58,6 +63,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     @Metric
+    @Cached
     @LogDataSourceError
     public List<ClientDto> getByLastName(String lastName) {
         return clientMapper.toDto(getEntityByLastName(lastName));
@@ -65,6 +71,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     @Metric
+    @Cached
     @LogDataSourceError
     public List<Client> getEntityByLastName(String lastName) {
         return clientRepository.findByLastName(lastName);
